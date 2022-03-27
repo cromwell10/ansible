@@ -3,3 +3,4 @@
   roles:
     - role: apache
 #      when: ansible_facts['distribution'] == "CentOS"
+...
