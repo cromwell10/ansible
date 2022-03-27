@@ -1,0 +1,31 @@
+---
+  - name: Checking if {{ webserver }} installed
+    yum:
+      name: "{{ webserver }}"
+      state: present
+  - name: Checking if httpd is running and enabled
+    service:
+      name: "{{ webserver }}" 
+      state: started
+      enabled: yes
+  - name: Creating a file with content
+    template:
+     src: mytemplate.j2
+     dest: "{{ web_index_path }}"
+  - name: Looking for installation of {{ firewall }}
+    yum:
+      name: "{{ firewall }}"
+      state: present
+  - name: Checking if {{ firewall }} is running and enabled
+    service:
+      name: "{{ firewall }}"
+      state: started
+      enabled: yes
+  - name: Opening port 80 for http access
+    firewalld:
+      service: "{{web_port}}"
+      permanent: true
+      state: enabled
+    when: firewall == "firewalld"
+    notify:
+    - Restart firewalld
