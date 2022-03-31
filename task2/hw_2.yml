@@ -1,5 +1,5 @@
 ---
-- hosts: nodes
+- hosts: all
   vars:
    userlist:
     alice:
