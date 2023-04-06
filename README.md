@@ -1,2 +1,2 @@
 # ansible
-Ansible homeworks
+Ansible playbooks for cloud infrastructure
